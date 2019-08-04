@@ -29,12 +29,14 @@
   },
   "dependencies": {
     "@octokit/graphql": "^3.0.1",
-    "commander": "^2.20.0"
+    "commander": "^2.20.0",
+    "node-emoji": "^1.10.0"
   },
   "devDependencies": {
     "@types/commander": "^2.12.2",
     "@types/jest": "^24.0.16",
     "@types/node": "^12.6.9",
+    "@types/node-emoji": "^1.8.1",
     "husky": "^3.0.2",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",

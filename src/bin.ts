@@ -3,6 +3,7 @@
 import program from 'commander'
 import getUserStatus from './get-user-status'
 import changeUserStatus from './change-user-status'
+import emojis from 'node-emoji'
 
 interface MainOptions {
   token?: string
@@ -38,7 +39,7 @@ program
 
 main(program as MainOptions)
   .then(status => {
-    console.log(status.emoji, status.message)
+    console.log(emojis.emojify(`${status.emoji}: ${status.message}`, n => n))
   })
   .catch(err => {
     const insufficientScope =
