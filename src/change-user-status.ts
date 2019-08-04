@@ -22,10 +22,12 @@ export default async function changeUserStatus(
   input: Input,
   token: string
 ): Promise<UserStatus> {
-  return graphql(query, {
+  const response = await graphql(query, {
     input,
     headers: {
       Authorization: `token ${token}`,
     },
   })
+
+  return response.status
 }
