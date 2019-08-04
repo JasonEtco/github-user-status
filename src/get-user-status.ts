@@ -1,5 +1,5 @@
-import graphql from '@octokit/graphql';
-import { UserStatus } from '.';
+import graphql from '@octokit/graphql'
+import { UserStatus } from '.'
 
 const viewerQuery = `query getViewerStatus {
   viewer {
@@ -9,7 +9,7 @@ const viewerQuery = `query getViewerStatus {
       indicatesLimitedAvailability
     }
   }
-}`;
+}`
 
 const userQuery = `query getUserStatus ($user: String!) {
   user (login: $user) {
@@ -19,7 +19,7 @@ const userQuery = `query getUserStatus ($user: String!) {
       indicatesLimitedAvailability
     }
   }
-}`;
+}`
 
 export default async function getUserStatus(
   token: string,
@@ -27,17 +27,17 @@ export default async function getUserStatus(
 ): Promise<UserStatus> {
   const headers = {
     Authorization: `token ${token}`,
-  };
-
-  let returnValue: UserStatus;
-
-  if (user) {
-    const response = await graphql(userQuery, { user, headers });
-    returnValue = response.user.status;
-  } else {
-    const response = await graphql(viewerQuery, { headers });
-    returnValue = response.viewer.status;
   }
 
-  return returnValue;
+  let returnValue: UserStatus
+
+  if (user) {
+    const response = await graphql(userQuery, { user, headers })
+    returnValue = response.user.status
+  } else {
+    const response = await graphql(viewerQuery, { headers })
+    returnValue = response.viewer.status
+  }
+
+  return returnValue
 }

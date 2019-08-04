@@ -1,5 +1,5 @@
-import graphql from '@octokit/graphql';
-import { UserStatus } from '.';
+import graphql from '@octokit/graphql'
+import { UserStatus } from '.'
 
 const query = `mutation changeUserStatus ($input: ChangeUserStatusInput!) {
   changeUserStatus (input: $input) {
@@ -9,13 +9,13 @@ const query = `mutation changeUserStatus ($input: ChangeUserStatusInput!) {
       indicatesLimitedAvailability
     }
   }
-}`;
+}`
 
 interface Input {
-  emoji?: string;
-  message: string;
-  expiresAt?: string;
-  limitedAvailability?: boolean;
+  emoji?: string
+  message: string
+  expiresAt?: string
+  limitedAvailability?: boolean
 }
 
 export default async function changeUserStatus(
@@ -27,5 +27,5 @@ export default async function changeUserStatus(
     headers: {
       Authorization: `token ${token}`,
     },
-  });
+  })
 }

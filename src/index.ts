@@ -1,21 +1,21 @@
 #!/usr/bin/env node
 
-import program from 'commander';
-import getUserStatus from './get-user-status';
-import changeUserStatus from './change-user-status';
+import program from 'commander'
+import getUserStatus from './get-user-status'
+import changeUserStatus from './change-user-status'
 
 export interface UserStatus {
-  emoji: string;
-  message: string;
-  expiresAt?: string;
-  indicatesLimitedAvailability?: boolean;
+  emoji: string
+  message: string
+  expiresAt?: string
+  indicatesLimitedAvailability?: boolean
 }
 
 interface MainOptions {
-  token?: string;
-  emoji?: string;
-  username?: string;
-  message?: string;
+  token?: string
+  emoji?: string
+  username?: string
+  message?: string
 }
 
 async function main({
@@ -25,15 +25,15 @@ async function main({
   token,
 }: MainOptions): Promise<UserStatus> {
   if (!token) {
-    throw new Error('Missing environment variable `GITHUB_TOKEN`.');
+    throw new Error('Missing environment variable `GITHUB_TOKEN`.')
   }
 
   if (message) {
-    const input = { emoji, message };
-    return changeUserStatus(input, token);
+    const input = { emoji, message }
+    return changeUserStatus(input, token)
   }
 
-  return getUserStatus(token, username);
+  return getUserStatus(token, username)
 }
 
 program
@@ -46,20 +46,20 @@ program
     'GitHub personal access token',
     process.env.GITHUB_TOKEN
   )
-  .parse(process.argv);
+  .parse(process.argv)
 
 main(program as MainOptions)
   .then(status => {
-    console.log(status.emoji, status.message);
+    console.log(status.emoji, status.message)
   })
   .catch(err => {
     const insufficientScope =
       err.errors &&
-      err.errors.find((e: any) => e.type === 'INSUFFICIENT_SCOPES');
+      err.errors.find((e: any) => e.type === 'INSUFFICIENT_SCOPES')
     if (insufficientScope) {
-      console.error(insufficientScope.message);
+      console.error(insufficientScope.message)
     } else {
-      console.error(err);
+      console.error(err)
     }
-    process.exit(1);
-  });
+    process.exit(1)
+  })
