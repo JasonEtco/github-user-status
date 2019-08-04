@@ -29,5 +29,5 @@ export default async function changeUserStatus(
     },
   })
 
-  return response.status
+  return response.changeUserStatus.status
 }
