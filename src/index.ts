@@ -30,6 +30,18 @@ async function main(): Promise<UserStatus> {
   return getUserStatus(token);
 }
 
-main().then(status => {
-  console.log(status.emoji, status.message);
-});
+main()
+  .then(status => {
+    console.log(status.emoji, status.message);
+  })
+  .catch(err => {
+    const insufficientScope =
+      err.errors &&
+      err.errors.find((e: any) => e.type === 'INSUFFICIENT_SCOPES');
+    if (insufficientScope) {
+      console.error(insufficientScope.message);
+    } else {
+      console.error(err);
+    }
+    process.exit(1);
+  });
