@@ -4,14 +4,18 @@
 
 ## Usage
 
+You'll need to [set a GitHub personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line), with the `user` scope if you want to change your own status.
+
+### Get the status of a user
+
+If no argument is passed, this will return your own status.
+
 ```sh
 $ npx github-user-status [user]
 ```
 
-Will return the status of that user, or, if omitted, your own status.
+### Change your status
 
 ```sh
 $ npx github-user-status set <message>
 ```
-
-Will set your status message!
