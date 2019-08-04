@@ -23,3 +23,26 @@ $ npx github-user-status -u <user>
 ```sh
 $ npx github-user-status -m <message> -e [emoji]
 ```
+
+## Programmatic Usage
+
+```js
+const { getUserStatus, changeUserStatus } = require('github-user-status')
+
+// Get your own status
+getUserStatus(token)
+
+// Get a user's status
+getUserStatus(token, 'JasonEtco')
+
+// Set your status
+changeUserStatus(
+  {
+    message, // string, required
+    emoji, // string
+    expiresAt, // string
+    limitedAvailability, // boolean
+  },
+  token
+)
+```

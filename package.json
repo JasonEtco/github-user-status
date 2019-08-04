@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "bin": {
+    "github-user-status": "./dist/bin.js"
+  },
   "files": [
     "dist",
     "README.md"

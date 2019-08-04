@@ -1,5 +1,5 @@
 import graphql from '@octokit/graphql'
-import { UserStatus } from '.'
+import { UserStatus } from './types'
 
 const query = `mutation changeUserStatus ($input: ChangeUserStatusInput!) {
   changeUserStatus (input: $input) {
