@@ -24,9 +24,11 @@
     "trailingComma": "es5"
   },
   "dependencies": {
-    "@octokit/graphql": "^3.0.1"
+    "@octokit/graphql": "^3.0.1",
+    "commander": "^2.20.0"
   },
   "devDependencies": {
+    "@types/commander": "^2.12.2",
     "@types/jest": "^24.0.16",
     "@types/node": "^12.6.9",
     "husky": "^3.0.2",

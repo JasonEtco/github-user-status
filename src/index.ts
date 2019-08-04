@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+
+import program from 'commander';
 import getUserStatus from './get-user-status';
 import changeUserStatus from './change-user-status';
 
@@ -8,29 +11,44 @@ export interface UserStatus {
   indicatesLimitedAvailability?: boolean;
 }
 
-async function main(): Promise<UserStatus> {
-  const token = process.env.GITHUB_TOKEN;
+interface MainOptions {
+  token?: string;
+  emoji?: string;
+  username?: string;
+  message?: string;
+}
+
+async function main({
+  emoji,
+  username,
+  message,
+  token,
+}: MainOptions): Promise<UserStatus> {
   if (!token) {
     throw new Error('Missing environment variable `GITHUB_TOKEN`.');
   }
 
-  const args = process.argv.slice(2);
-  const setOrUser = args[0];
-
-  if (setOrUser) {
-    if (setOrUser === 'set') {
-      const remainingArgs = args.slice(1).join(' ');
-      const input = { emoji: '👍', message: remainingArgs };
-      return changeUserStatus(input, token);
-    } else {
-      return getUserStatus(token, setOrUser);
-    }
+  if (message) {
+    const input = { emoji, message };
+    return changeUserStatus(input, token);
   }
 
-  return getUserStatus(token);
+  return getUserStatus(token, username);
 }
 
-main()
+program
+  .version(require('../package.json').version)
+  .option('-u, --username [username]', 'The user to get the status of')
+  .option('-m, --message [message]', 'The message to set your status with')
+  .option('-e, --emoji [emoji]', 'The emoji to use for your status')
+  .option(
+    '-t, --token [token]',
+    'GitHub personal access token',
+    process.env.GITHUB_TOKEN
+  )
+  .parse(process.argv);
+
+main(program as MainOptions)
   .then(status => {
     console.log(status.emoji, status.message);
   })

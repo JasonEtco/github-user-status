@@ -6,16 +6,20 @@
 
 You'll need to [set a GitHub personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line), with the `user` scope if you want to change your own status.
 
-### Get the status of a user
-
-If no argument is passed, this will return your own status.
+### Get your own status
 
 ```sh
-$ npx github-user-status [user]
+$ npx github-user-status
+```
+
+### Get the status of a user
+
+```sh
+$ npx github-user-status -u <user>
 ```
 
 ### Change your status
 
 ```sh
-$ npx github-user-status set <message>
+$ npx github-user-status -m <message> -e [emoji]
 ```

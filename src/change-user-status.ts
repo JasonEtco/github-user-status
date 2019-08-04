@@ -12,7 +12,7 @@ const query = `mutation changeUserStatus ($input: ChangeUserStatusInput!) {
 }`;
 
 interface Input {
-  emoji: string;
+  emoji?: string;
   message: string;
   expiresAt?: string;
   limitedAvailability?: boolean;
